@@ -9,32 +9,23 @@
           <h1 class="text-center">Criar conta ou Entrar</h1>
           <p class="text-center lead">Faça login ou crie sua conta abaixo</p>
 
-          <!-- Mensagens caso tenha algum erro ou usuario cadastrado com sucesso -->
-          <%- include('includes/messages'); %>
-
             <div class="row">
 
               <div class="col-lg my-5">
                 <h4>Inscreva-se!</h4>
 
                 <form class="form-cadastro" action="/login/register" method="POST">
-                  <input type="hidden" name="_csrf" value=<%=csrfToken %>>
-
                   <div class="form-group">
                     <label class="form-label" placeholder="Nome Completo" aria-label="Nome Completo">Nome Completo</label>
                     <input type="text" class="form-control" name="nome">
                   </div>
                   <div class="form-group">
                     <label class="form-label">CPF</label>
-                    <input type="number" class="form-control" name="cpf">
-                  </div>
-                  <div class="form-group col-xs-2">
-                    <label class="form-label">DDD</label>
-                    <input type="number" class="form-control" name="ddd">
+                    <input type="text" class="form-control" name="cpf">
                   </div>
                   <div class="form-group col-xs-10">
                     <label class="form-label">Celular</label>
-                    <input type="number" class="form-control" name="celular">
+                    <input type="text" class="form-control" name="celular">
                   </div>
                   <div class="form-group">
                     <label class="form-label">E-mail</label>
@@ -67,8 +58,13 @@
                 <p>Já tem cadastro?</p>
                 <p>Digite seus dados para entrar.</p>
 
-                <form class="form-login" action="/login/login" method="POST">
-                  <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                <% if (error) { %>
+                <div class="alert alert-danger">
+                  Usuário ou senha incorreto
+                </div>
+                <% } %>
+
+                <form class="form-login" action="/login/logar" method="POST">
                   <div class="form-group">
                     <label>E-mail</label>
                     <input type="email" class="form-control" name="email">
